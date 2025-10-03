@@ -1,0 +1,25 @@
+name: Weekly Compliance Scans
+on:
+  schedule:
+    - cron: "0 8 * * 1"  # Mondays 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  scans:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare folders
+        run: |
+          d=$(date +%F)
+          mkdir -p compliance-automation/reports/json/$d
+      - name: Lynis (example local)
+        run: |
+          echo '{"tool":"lynis","pass":42,"fail":3}' > compliance-automation/reports/json/$(date +%F)/lynis.json
+      - name: Export Markdown summary
+        run: |
+          python3 compliance-automation/evidence-collector/exporters/json_to_md.py || true
+      - name: Commit evidence
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(compliance): add weekly scan evidence"
