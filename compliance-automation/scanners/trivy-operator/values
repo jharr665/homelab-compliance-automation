@@ -1,0 +1,10 @@
+operator:
+  scanJobsConcurrentLimit: 3
+  vulnerabilityScannerEnabled: true
+  configAuditScannerEnabled: true
+  rbacAssessmentScannerEnabled: true
+  clusterComplianceEnabled: true
+
+trivy:
+  ignoreUnfixed: true
+  severity: HIGH,CRITICAL
