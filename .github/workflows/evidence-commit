@@ -1,0 +1,15 @@
+name: Evidence Commit
+on:
+  workflow_dispatch:
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export Markdown summary
+        run: python3 compliance-automation/evidence-collector/exporters/json_to_md.py || true
+      - name: Commit evidence
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(compliance): update evidence summaries"
