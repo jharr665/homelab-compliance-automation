@@ -1,0 +1,4 @@
+# n8n workflows (placeholders)
+
+- `weekly-scan.json`: trigger → run kube-bench job, fetch logs, write JSON to `reports/json/DATE/`
+- `quarterly-report.json`: trigger → compile metrics and create signed PDF (hook to Cosign/Rekor if desired)
