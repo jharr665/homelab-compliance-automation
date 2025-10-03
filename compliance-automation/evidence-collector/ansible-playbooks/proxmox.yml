@@ -1,0 +1,19 @@
+---
+- name: Pull Proxmox compliance evidence
+  hosts: proxmox
+  gather_facts: false
+  tasks:
+    - name: Fetch Proxmox users/roles
+      command: pveum role list
+      register: roles
+    - name: Save roles
+      copy:
+        content: "{{ roles.stdout }}"
+        dest: "../../reports/json/{{ lookup('pipe','date +%F') }}/proxmox_roles.txt"
+    - name: Fetch backup jobs
+      command: pvesh get /nodes/localhost/storage
+      register: storage
+    - name: Save storage
+      copy:
+        content: "{{ storage.stdout }}"
+        dest: "../../reports/json/{{ lookup('pipe','date +%F') }}/proxmox_storage.json"

@@ -1,0 +1,15 @@
+---
+- name: Pull OPNsense evidence
+  hosts: opnsense
+  gather_facts: false
+  tasks:
+    - name: Pull running config (API)
+      uri:
+        url: "https://{{ inventory_hostname }}/api/diagnostics/system/setupWizard"
+        method: GET
+        validate_certs: false
+      register: cfg
+    - name: Save config
+      copy:
+        content: "{{ cfg.json | to_nice_json }}"
+        dest: "../../reports/json/{{ lookup('pipe','date +%F') }}/opnsense_config.json"
