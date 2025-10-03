@@ -1,0 +1,12 @@
+# AUDIT-RUNBOOKS
+
+1) When a control fails:
+- Confirm evidence path in `reports/json/DATE/CONTROL.json`
+- Check Grafana panel for trend/regression
+- Create remediation task (Jira/GitHub Issues)
+- Document fix in Obsidian page linked from the alert
+
+2) Before an audit:
+- Freeze a tag/release with latest evidence
+- Generate signed PDF via `report-publish.yml`
+- (Optional) Create Rekor entries for key artifacts
