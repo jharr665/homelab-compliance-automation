@@ -22,7 +22,7 @@
 
 ```mermaid
 flowchart TD
-    subgraph Compliance Stack
+    subgraph Compliance_Stack
         A[Scanners] -->|JSON Reports| B[Evidence Collector]
         B -->|Markdown/JSON| C[Evidence Store]
         C --> D[Grafana Dashboards]
@@ -33,8 +33,9 @@ flowchart TD
     A ---|kube-bench, Trivy, Lynis, OpenSCAP, kube-hunter| Cluster
     C ---|Git Commits, Rekor Attestations| Repo[GitHub Repo]
 
-    D --> G[Audit Reports (PDF)]
-    E --> H[Runbooks & SOC Workflows]
+    D --> G["Audit Reports (PDF)"]
+    E --> H["Runbooks & SOC Workflows"]
+
 
 ```
 
