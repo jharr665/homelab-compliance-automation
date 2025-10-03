@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: trivy-system
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kube-bench
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-bench
+  namespace: kube-bench
+spec:
+  selector:
+    matchLabels:
+      app: kube-bench
+  template:
+    metadata:
+      labels:
+        app: kube-bench
+    spec:
+      hostPID: true
+      tolerations:
+      - operator: Exists
+      containers:
+      - name: kube-bench
+        image: aquasec/kube-bench:latest
+        command: ["kube-bench", "--json"]
+        volumeMounts:
+        - name: var-lib-etcd
+          mountPath: /var/lib/etcd
+          readOnly: true
+        - name: etc-systemd
+          mountPath: /etc/systemd
+          readOnly: true
+        - name: etc-kubernetes
+          mountPath: /etc/kubernetes
+          readOnly: true
+      volumes:
+      - name: var-lib-etcd
+        hostPath:
+          path: /var/lib/etcd
+      - name: etc-systemd
+        hostPath:
+          path: /etc/systemd
+      - name: etc-kubernetes
+        hostPath:
+          path: /etc/kubernetes
