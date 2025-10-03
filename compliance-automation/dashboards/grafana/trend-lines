@@ -1,0 +1,16 @@
+{
+  "title": "Compliance Trends",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "CIS \u2014 Weekly Results",
+      "targets": []
+    },
+    {
+      "type": "graph",
+      "title": "Critical Vulns (Trivy) \u2014 30d",
+      "targets": []
+    }
+  ],
+  "schemaVersion": 36
+}
