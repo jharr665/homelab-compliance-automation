@@ -1,0 +1,21 @@
+{
+  "title": "Compliance Scorecard",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "CIS Pass %",
+      "targets": []
+    },
+    {
+      "type": "stat",
+      "title": "SOC2 Pass % (mapped)",
+      "targets": []
+    },
+    {
+      "type": "graph",
+      "title": "Trend \u2014 Failures Over Time",
+      "targets": []
+    }
+  ],
+  "schemaVersion": 36
+}
