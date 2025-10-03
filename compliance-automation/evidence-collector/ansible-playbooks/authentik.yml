@@ -1,0 +1,13 @@
+---
+- name: Pull Authentik evidence
+  hosts: authentik
+  gather_facts: false
+  tasks:
+    - name: Check MFA/enrollment policy
+      shell: |
+        ak policy list --json
+      register: akpol
+    - name: Save MFA policy
+      copy:
+        content: "{{ akpol.stdout }}"
+        dest: "../../reports/json/{{ lookup('pipe','date +%F') }}/authentik_policies.json"
